@@ -24,6 +24,7 @@
             color: lemonchiffon;
         }
     </style>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
     <header>
@@ -52,6 +53,13 @@
                     <li class="nav-item nav-link">
                         @Html.ActionLink("Enrollment", "Index", "Enrollment")
                     </li>
+                    <li class="nav-item nav-link">
+                        @Html.ActionLink("Display Students", "Display", "Student")
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item nav-link"><a href="#"><i class="fas fa-registered"></i>Register</a></li>
+                    <li class="nav-item nav-link"><a href="#"><i class="fas fa-sign-in-alt"></i>Login</a></li>
                 </ul>
             </div>
         </nav>
@@ -66,6 +74,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>

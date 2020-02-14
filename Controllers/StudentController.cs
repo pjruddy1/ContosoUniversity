@@ -15,6 +15,11 @@ namespace ContosoUniversity.Controllers
     {
         private SchoolContext db = new SchoolContext();
 
+        public ActionResult Display()
+        {
+            return View(db.Students.ToList());
+        }
+
         // GET: Student
         public ActionResult Index()
         {
