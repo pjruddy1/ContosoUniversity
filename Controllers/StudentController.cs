@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using PagedList;
+using System.Data.Entity.Infrastructure;
 
 namespace ContosoUniversity.Controllers
 {
@@ -163,18 +164,19 @@ namespace ContosoUniversity.Controllers
         public ActionResult Edit([Bind(Include = "ID,LastName,FirstMidName,Phone,EnrollmentDate")] Student student)
         {
             if (ModelState.IsValid)
-
+            {
                 try
                 {
                     db.Entry(student).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                catch (Exception)
+                catch (RetryLimitExceededException)
                 {
                     ModelState.AddModelError("", "Unaable to save changes. Try again and if the problem persists contact your admin");
                 }
 
+            }
             return View(student);
         }
 
@@ -209,7 +211,7 @@ namespace ContosoUniversity.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (RetryLimitExceededException)
             {
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
